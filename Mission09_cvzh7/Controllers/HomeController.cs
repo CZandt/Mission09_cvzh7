@@ -16,7 +16,7 @@ namespace Mission09_cvzh7.Controllers
 
         public HomeController(IBookstoreRepository temp)
         {
-            repo = temp;
+            repo = temp; // initializes the private repo from the temp object
         }
 
         public IActionResult Index()
