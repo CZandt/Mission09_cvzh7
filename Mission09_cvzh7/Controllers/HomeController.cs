@@ -20,20 +20,24 @@ namespace Mission09_cvzh7.Controllers
             repo = temp; // initializes the private repo from the temp object
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string bookCategory, int pageNum = 1)
         {
             int pageSize = 10;
 
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(b => b.Category == bookCategory || bookCategory == null)
                 .OrderBy(b => b.Title)
                 .Skip(pageSize * (pageNum - 1))
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumProjects = repo.Books.Count(),
+                    TotalNumProjects = 
+                        (bookCategory == null
+                            ? repo.Books.Count()
+                            : repo.Books.Where(x => x.Category == bookCategory).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
