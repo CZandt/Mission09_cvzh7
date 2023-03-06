@@ -32,8 +32,14 @@ namespace Mission09_cvzh7
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
 
-            //SOMETHING HERE FOR REPO
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+
+            //For sessions to be able to work for the cart
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,29 +58,29 @@ namespace Mission09_cvzh7
 
             app.UseStaticFiles();
 
+            app.UseSession(); // Enables the use of sessions for the cart
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                     name: "CatPage",
                     pattern: "{bookCategory}/Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
-            });
 
-            app.UseEndpoints(endpoints =>
-            {
                 endpoints.MapControllerRoute(
                     name: "Paging",
                     pattern: "Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
 
-                endpoints.MapDefaultControllerRoute();
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
                 endpoints.MapControllerRoute("Cat", "{bookCategory}", new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
+
             });
         }
     }
