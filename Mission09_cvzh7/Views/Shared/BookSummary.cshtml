@@ -6,32 +6,42 @@
 @model Book
 
 <div class="card card-outline-primary m-1 p-1">
-    <div class="bg-faded p-1">
-        <h4>
-            @Model.Title
-            <span class="badge badge-pill badge-primary" style="float:right">
-                <small>@Model.Price.ToString("c")</small>
+    <div class="card-header">
+        <h4>@Model.Title</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <p>By: @Model.Author</p>
+                </div>
+                <div class="col-sm">
+                    <span class="badge badge-primary" style="float:right"><h6>@Model.Price.ToString("c")</h6></span>
+                </div>
+
+            </div>
+        </div>
+ 
+
+    </div>
+    <div class="card-body">
+        <div class="card">
+            <div class="card-text p-1">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Publisher: @Model.Publisher</li>
+                    <li class="list-group-item">Category: @Model.Category</liclass="list-group-item">
+                    <li class="list-group-item">Classification: @Model.Classification</li>
+                    <li class="list-group-item">Page Count: @Model.PageCount</li>
+                    <li class="list-group-item">ISBN: @Model.Isbn</li>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <form method="post" asp-page="/Cart">
+            <input type="hidden" asp-for="@Model.BookId" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+            <span class="card-body">
+                <button type="submit" class="btn btn-success btn-sm float-right">Add To Cart</button>
             </span>
-        </h4>
-        <p>&emsp; &emsp;By: @Model.Author</p>
+        </form>
     </div>
-    <div class="card-text p-1">
-        <ul>
-            <li>Publisher: @Model.Publisher</li>
-            <li>Category: @Model.Category</li>
-            <li>Classification: @Model.Classification</li>
-            <li>Page Count: @Model.PageCount</li>
-            <li>ISBN: @Model.Isbn</li>
-        </ul>
-    </div>
-
-    <form method="post" asp-page="/Cart">
-        <input type="hidden" asp-for="@Model.BookId" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"
-
-        <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-right">Add To Cart</button>
-        </span>
-    </form>
-
 </div>
