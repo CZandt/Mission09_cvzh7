@@ -40,7 +40,12 @@ namespace Mission09_cvzh7.Controllers
                             : repo.Books.Where(x => x.Category == bookCategory).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
-                }
+                },
+
+                Categories = repo.Books
+                .OrderBy(b => b.Category)
+
+
             };
             return View(x);
         }

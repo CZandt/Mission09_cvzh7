@@ -9,5 +9,7 @@ namespace Mission09_cvzh7.Models.ViewModels
     {
         public IQueryable<Book> Books { get; set; }
         public PageInfo PageInfo { get; set; }
+
+        public IQueryable<Book> Categories { get; set; }
     }
 }

@@ -10,7 +10,7 @@
         <tr>
             <th>Book</th>
             <th>Quantity</th>
-            <th>Cost</th>
+            <th>Price</th>
             <th>Subtotal</th>
         </tr>
     </thead>
@@ -21,8 +21,8 @@
             <tr>
                 <td>@i.Book.Title</td>
                 <td>@i.Quantity</td>
-                <td>@i.Book.Price</td>
-                <td>@(i.Quantity * i.Book.Price)</td>
+                <td>@i.Book.Price.ToString("c")</td>
+                <td>@((i.Quantity * i.Book.Price).ToString("c"))</td>
             </tr>
         }
     </tbody>
@@ -35,3 +35,7 @@
     </tfoot>
 
 </table>
+
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+</div>

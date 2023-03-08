@@ -12,8 +12,9 @@ namespace Mission09_cvzh7.Pages
 {
     public class CartModel : PageModel
     {
-
+         
         private IBookstoreRepository repo { get; set; }
+        public string ReturnUrl { get; set; }
 
         public CartModel (IBookstoreRepository temp)
         {
@@ -21,12 +22,13 @@ namespace Mission09_cvzh7.Pages
         }
         public Basket basket { get; set; }
 
-        public void OnGet(Basket b)
+        public void OnGet(string returnUrl)
         {
+            ReturnUrl = returnUrl ?? "/";
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
-        public IActionResult OnPost(int bookId)
+        public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
@@ -36,7 +38,7 @@ namespace Mission09_cvzh7.Pages
 
             HttpContext.Session.SetJson("basket", basket);
             
-            return RedirectToPage();
+            return RedirectToPage(new { ReturnUrl = returnUrl });
         }
     }
 }

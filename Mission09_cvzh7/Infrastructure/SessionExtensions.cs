@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Mission09_cvzh7.Infrastructure
             session.SetString(key, JsonSerializer.Serialize(value));
         }
 
-        public static T GetJson<T> (this ISession session, string key, object value)
+        public static T GetJson<T> (this ISession session, string key)
         {
             var sessionData = session.GetString(key);
 

@@ -6,13 +6,49 @@
     <title>@ViewBag.Title</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
+@model BooksViewModel
+
 <body>
 
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">BOOK STORE</span>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index" asp-route-bookCategory="" asp-route-pageNum="1">
+            <img src="~/img/clipart2158889.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Bookstore
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index" asp-route-bookCategory="" asp-route-pageNum="1">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach (var b in Model.Books.Select(x => x.Category).Distinct().OrderBy(x => x))
+                        {
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Index" asp-route-bookCategory="@b" asp-route-pageNum="1">@b</a>
+                        }
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Cart">Cart</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="m-1 p-1">
         @RenderBody()
     </div>
 </body>
