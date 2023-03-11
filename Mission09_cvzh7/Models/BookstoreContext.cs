@@ -20,6 +20,7 @@ namespace Mission09_cvzh7.Models
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Checkout> Checkouts { get; set; }
 
     }
 }
