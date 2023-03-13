@@ -11,5 +11,7 @@ namespace Mission09_cvzh7.Models.ViewModels
         public PageInfo PageInfo { get; set; }
 
         public IQueryable<Book> Categories { get; set; }
+
+        public Checkout Checkout { get; set; }
     }
 }

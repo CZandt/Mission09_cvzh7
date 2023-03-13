@@ -1,4 +1,5 @@
 ﻿@{
+    ViewData["Title"] = "Checkout";
 }
 
 @model Checkout
@@ -6,12 +7,12 @@
 <h2>Checkout now</h2>
 <p>Please enter your details, and we will get your order processed to be shipped!</p>
 
-<form method="post">
-
+<form method="post" asp-action="Checkout">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <h4>Ship To</h4>
 
     <div class="form-group">
-        <label asp-for="Name">Name:</label>
+        <label asp-for="Name"> Name: </label>
         <input asp-for="Name" class="form-control" />
     </div>
 

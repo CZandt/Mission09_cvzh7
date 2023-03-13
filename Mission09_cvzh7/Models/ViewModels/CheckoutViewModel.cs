@@ -7,5 +7,8 @@ namespace Mission09_cvzh7.Models.ViewModels
 {
     public class CheckoutViewModel
     {
+        
+
+
     }
 }
